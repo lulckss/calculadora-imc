@@ -5,10 +5,12 @@ const App = () => {
   const [peso, setPeso] = useState("");
   const [altura, setAltura] = useState("");
   const [resultado, setResultado] = useState("");
+  const [mostrarResultado, setMostrarResultado] = useState(false);
 
   const calcularIMC = () => {
     if (peso === "" || altura === "") {
       setResultado("Por favor, preencha todos os campos!");
+      setMostrarResultado(true);
       return;
     }
 
@@ -30,6 +32,7 @@ const App = () => {
     }
 
     setResultado(`Seu IMC é: ${imc.toFixed(2)} (${classificacao})`);
+    setMostrarResultado(true);
   };
 
   return (
@@ -89,9 +92,12 @@ const App = () => {
             Calcular
           </button>
 
-          <h2 className="text-white text-xl mt-4">
-            IMC: <span className="text-violet-800">{resultado}</span>
-          </h2>
+          {/* Exibe o resultado se mostrarResultado for verdadeiro */}
+          {mostrarResultado && (
+            <h2 className="text-white text-xl mt-4">
+              IMC: <span className="text-violet-800">{resultado}</span>
+            </h2>
+          )}
         </div>
       </div>
     </div>
